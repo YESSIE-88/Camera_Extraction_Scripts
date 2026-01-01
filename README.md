@@ -1,5 +1,6 @@
 # --- SYSTEM DEPENDENCIES (Run once) ---
 sudo apt update
+sudo apt install ffmpeg
 sudo apt install python3-venv libegl1-mesa-dev libgl1-mesa-dev libpulse0
 sudo apt install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav
 
@@ -14,3 +15,15 @@ pip install PySide6 piexif
 python add_video_metadata.py
 
 python process_camera_data.py
+
+
+
+# --- TO COPY FILES FROM THE SD CARD (Put in bashrc)--
+smart_copy() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: smart_copy <source> <destination>"
+        return 1
+    fi
+
+    rsync -ah --info=progress2 "$1" "$2"
+}
